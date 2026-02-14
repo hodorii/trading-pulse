@@ -1,8 +1,10 @@
 ---
+layout: post
 session_id: "2026-01-20-2141"
-session_order: 07
-title: "통합 기타 total trading strategy v2.1"
+session_order: "07"
+title: "통합_기타_total_trading_strategy_v2.1"
 ---
+
 
 # [2026-01-20 21:41] total-trading-strategy [I]: 6개 종목 통합 대응 전략
 

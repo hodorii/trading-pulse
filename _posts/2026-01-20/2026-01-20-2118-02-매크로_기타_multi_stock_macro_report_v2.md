@@ -1,8 +1,10 @@
 ---
+layout: post
 session_id: "2026-01-20-2118"
-session_order: 02
-title: "매크로 기타 multi stock macro report v2"
+session_order: "02"
+title: "매크로_기타_multi_stock_macro_report_v2"
 ---
+
 
 # [2026-01-20 21:31] corrected: 마켓/매크로 실시간 분석 (NXT 실거래가 확인)
 
