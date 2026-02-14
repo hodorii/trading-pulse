@@ -1,1 +1,8 @@
+title: Trading Pulse
+email: hodorii@gmail.com
+description: >-
+  AI Agent기반 정밀 실측 트레이딩 리포트 서비스. 
+  시장 맥박(Pulse)을 가장 정확하게 짚어냅니다.
+baseurl: "/trading-pulse"
+url: "https://hodorii.github.io"
 theme: minima
