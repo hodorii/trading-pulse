@@ -299,6 +299,7 @@ title: Trading Pulse Archive
           <div class="session-header">
             <div class="session-info">
               <span class="session-id">{{ post_session }}</span>
+              <span class="date">{{ post_session | slice: 11, 2 }}:{{ post_session | slice: 13, 2 }}</span>
             </div>
           </div>
           <div class="report-list">
