@@ -7,7 +7,7 @@ title: Trading Pulse Archive
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
-<script src="{{ '/js/search.js' | relative_url }}"></script>
+<script src="{{ '/js/search.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
 <style>
   :root {
