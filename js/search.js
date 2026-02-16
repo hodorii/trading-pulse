@@ -96,10 +96,24 @@ layout: null
     return results;
   }
 
+  function getSessionId(post) {
+    const sid = post.session_id;
+    if (sid && sid.trim() !== '') {
+      return sid.trim();
+    }
+    const d = new Date(post.date);
+    const yy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm2 = String(d.getMinutes()).padStart(2, '0');
+    return `${yy}-${mm}-${dd}-${hh}${mm2}`;
+  }
+
   function groupBySession(results) {
     const groups = {};
     results.forEach(post => {
-      const sessionId = post.session_id || post.date;
+      const sessionId = getSessionId(post);
       if (!groups[sessionId]) {
         groups[sessionId] = {
           session_id: sessionId,
@@ -124,7 +138,7 @@ layout: null
 
     let html = '';
     groups.forEach(group => {
-      const sessionId = group.session_id || group.date;
+      const sessionId = group.session_id;
       const dateStr = sessionId.slice(0, 10);
       const timeStr = sessionId.slice(11, 16);
       const dateObj = new Date(dateStr);
@@ -141,9 +155,11 @@ layout: null
         </div>
         <div class="report-list">`;
 
-      const sortedPosts = group.posts.sort((a, b) => 
-        (parseInt(a.session_order) || 0) - (parseInt(b.session_order) || 0)
-      );
+      const sortedPosts = group.posts.sort((a, b) => {
+        const orderA = parseInt(a.session_order) || 0;
+        const orderB = parseInt(b.session_order) || 0;
+        return orderA - orderB;
+      });
 
       sortedPosts.forEach(post => {
         const title = post.title.replace(/_/g, ' ');
