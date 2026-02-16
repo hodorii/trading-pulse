@@ -226,13 +226,37 @@ title: Trading Pulse Archive
     color: var(--text-primary);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: space-between;
     border-bottom: 1px solid var(--border);
   }
 
-  .session-header .date {
-    color: var(--accent);
+  .session-header .session-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .session-header .session-id {
     font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 0.85rem;
+    background: var(--accent-glow);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  .session-header .date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .session-header .report-count {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: var(--bg-secondary);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
   }
 
   .report-list {
@@ -380,27 +404,41 @@ title: Trading Pulse Archive
   </section>
 
   <div id="search-results" class="results-container">
-    {% assign posts_by_session = site.posts | group_by: "session_id" %}
-    {% for session in posts_by_session %}
-      {% if session.name == "" or session.name == nil %}{% continue %}{% endif %}
-      <div class="session-group">
-        <div class="session-header">
-          🗓️ <span class="date">{% assign date_p = session.name | slice: 0, 10 %}{% assign hh = session.name | slice: 11, 2 %}{% assign mm = session.name | slice: 13, 2 %}{{ date_p }} {{ hh }}:{{ mm }}</span>
-        </div>
-        <div class="report-list">
-          {% assign sorted_items = session.items | sort: "session_order" %}
-          {% for post in sorted_items %}
-            <div class="report-item">
-              <span class="report-seq">{{ post.session_order }}</span>
-              <div class="report-title">
-                <a class="report-link" href="{{ post.url | relative_url }}">{{ post.title | replace: "_", " " }}</a>
-              </div>
-              <span class="report-time">{{ hh }}:{{ mm }}</span>
+    {% assign sorted_posts = site.posts | sort: "session_id" | reverse %}
+    {% assign current_session = "" %}
+    
+    {% for post in sorted_posts %}
+      {% assign post_session = post.session_id %}
+      {% if post_session == nil or post_session == "" %}
+        {% assign post_session = post.date | date: "%Y-%m-%d-%H%M" %}
+      {% endif %}
+      
+      {% if current_session != post_session %}
+        {% if current_session != "" %}
+          </div></div>
+        {% endif %}
+        <div class="session-group">
+          <div class="session-header">
+            <div class="session-info">
+              <span class="session-id">{{ post_session }}</span>
             </div>
-          {% endfor %}
+          </div>
+          <div class="report-list">
+        {% assign current_session = post_session %}
+      {% endif %}
+      
+      <div class="report-item">
+        <span class="report-seq">{{ post.session_order }}</span>
+        <div class="report-title">
+          <a class="report-link" href="{{ post.url | relative_url }}">{{ post.title | replace: "_", " " }}</a>
         </div>
+        <span class="report-time">{{ post_session | slice: 11, 2 }}:{{ post_session | slice: 13, 2 }}</span>
       </div>
     {% endfor %}
+    {% if current_session != "" %}
+          </div>
+        </div>
+    {% endif %}
   </div>
 
   <footer class="footer">
