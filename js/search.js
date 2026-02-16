@@ -110,7 +110,7 @@ layout: null
       groups[sessionId].posts.push(post);
     });
 
-    return Object.values(groups).sort((a, b) => b.date.localeCompare(a.date));
+    return Object.values(groups).sort((a, b) => b.session_id.localeCompare(a.session_id));
   }
 
   function renderResults(groups) {
@@ -124,14 +124,21 @@ layout: null
 
     let html = '';
     groups.forEach(group => {
-      const dateStr = group.date;
+      const sessionId = group.session_id || group.date;
+      const dateStr = sessionId.slice(0, 10);
+      const timeStr = sessionId.slice(11, 16);
       const dateObj = new Date(dateStr);
       const formattedDate = dateObj.toLocaleDateString('ko-KR', { 
         year: 'numeric', month: 'long', day: 'numeric' 
       });
 
       html += `<div class="session-group">
-        <div class="session-header">📅 ${formattedDate}</div>
+        <div class="session-header">
+          <div class="session-info">
+            <span class="session-id">${sessionId}</span>
+            <span class="date">${timeStr}</span>
+          </div>
+        </div>
         <div class="report-list">`;
 
       const sortedPosts = group.posts.sort((a, b) => 
