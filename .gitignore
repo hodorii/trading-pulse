@@ -12,3 +12,4 @@ _site/
 vendor/
 .bundle/
 Gemfile.lock
+node_modules
