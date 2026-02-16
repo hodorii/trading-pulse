@@ -1,0 +1,16 @@
+---
+layout: null
+---
+[
+  {% for post in site.posts %}
+  {
+    "title": "{{ post.title | replace: '"', '\\"' }}",
+    "url": "{{ post.url | relative_url }}",
+    "date": "{{ post.date | date: "%Y-%m-%d" }}",
+    "session_id": "{{ post.session_id }}",
+    "session_order": "{{ post.session_order }}",
+    "type": "{% if post.title %}{{ post.title | split: '_' | first }}{% endif %}",
+    "content": "{{ post.content | strip_html | strip_newlines | replace: '"', '\\"' | truncate: 200 }}"
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
