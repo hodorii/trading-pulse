@@ -230,8 +230,6 @@ layout: null
       if (dateFrom) dateFrom.addEventListener('change', handleSearch);
       if (dateTo) dateTo.addEventListener('change', handleSearch);
       if (searchBtn) searchBtn.addEventListener('click', handleSearch);
-
-      handleSearch();
     }
   });
 
