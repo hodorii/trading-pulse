@@ -101,6 +101,10 @@ layout: null
     if (sid && sid.trim() !== '') {
       return sid.trim();
     }
+    if (post.path) {
+      const match = post.path.match(/(\d{4}-\d{2}-\d{2}-\d{4})/);
+      if (match) return match[1];
+    }
     const d = new Date(post.date);
     const yy = d.getFullYear();
     const mm = String(d.getMonth() + 1).padStart(2, '0');

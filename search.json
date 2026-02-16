@@ -6,6 +6,7 @@ layout: null
   {
     "title": "{{ post.title | replace: '"', '\\"' }}",
     "url": "{{ post.url | relative_url }}",
+    "path": "{{ post.path }}",
     "date": "{{ post.date | date: "%Y-%m-%d" }}",
     "session_id": "{{ post.session_id }}",
     "session_order": "{{ post.session_order }}",
