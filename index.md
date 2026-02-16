@@ -282,10 +282,9 @@ title: Trading Pulse Archive
   </section>
 
   <div id="search-results" class="results-container">
-    {% assign sorted_posts = site.posts | sort: "session_id" | reverse %}
     {% assign current_session = "" %}
     
-    {% for post in sorted_posts %}
+    {% for post in site.posts %}
       {% assign post_session = post.session_id %}
       {% if post_session == nil or post_session == "" %}
         {% assign post_session = post.date | date: "%Y-%m-%d-%H%M" %}
