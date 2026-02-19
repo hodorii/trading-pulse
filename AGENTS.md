@@ -217,9 +217,35 @@ bundle exec jekyll build
 
 ---
 
-## 8. 중요 규칙
+## 8. session_id 및 정렬 규칙
+
+### session_id 형식
+- **필수**: `YYYY-MM-DD-HHMM` 형식 (예: `2026-02-15-1430`)
+- **중요**: YAML에서 정수로 파싱되지 않도록 항상 **따옴표**로 감싸기
+- 파일명에서 시간 추출: 파일명 형식 `2026-02-15-1430_유형_종목.md`
+
+```yaml
+# Good
+session_id: "2026-02-15-1430"
+
+# Bad - YAML에서 정수로 파싱됨
+session_id: 1430
+```
+
+### session_order
+- 세션 내 포스트 순서를 나타내는 정수
+- 1부터 시작, 오름차순으로 표시
+
+### 정렬 로직
+- **세션**: session_id 기준 내림차순 (최신 → 과거)
+- **세션 내**: session_order 기준 오름차순 (1번 → 순차)
+
+---
+
+## 9. 중요 규칙
 
 1. **Pull Request 전 로컬 빌드 확인**: `bundle exec jekyll build` 성공 필수
 2. **검색 JS 수정 시**: Fuse.js 옵션 임의 변경 금지 (검색 정확도 영향)
 3. **새 종목/유형 추가**: `js/search.js`의 `TYPES`, `STOCKS` 배열 업데이트 필요
 4. **커밋 메시지**: 한국어 또는 영어로 명확하게 작성
+5. **Git 반영 의무**: 모든 코드 변경은 git commit → push 필수
