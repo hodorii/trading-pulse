@@ -96,16 +96,74 @@ layout: null
     return results;
   }
 
-  function getSessionId(post) {
-    const sid = post.session_id;
-    if (sid && sid.trim() !== '') {
-      return sid.trim();
+  // Normalize session_id to string and ensure full format YYYY-MM-DD-HHMM
+  function normalizeSessionId(sid, post) {
+    // Handle null/undefined/empty
+    if (!sid) {
+      sid = '';
     }
-    if (post.path) {
-      const match = post.path.match(/(\d{4}-\d{2}-\d{2}-\d{4})/);
-      if (match) return match[1];
+    
+    // Convert to string (handles integer values like 0400 from YAML)
+    const sidStr = String(sid).trim();
+    
+    // If empty, try to extract from path
+    if (sidStr === '') {
+      if (post.path) {
+        const match = post.path.match(/(\d{4}-\d{2}-\d{2}-\d{4})/);
+        if (match) return match[1];
+      }
+      // Fallback: generate from date
+      return generateSessionIdFromDate(post.date);
     }
-    const d = new Date(post.date);
+    
+    // If it's just a 4-digit time (e.g., "0400"), extract date from path or date field
+    if (/^\d{4}$/.test(sidStr)) {
+      const dateFromPath = extractDateFromPath(post.path);
+      if (dateFromPath) {
+        return `${dateFromPath}-${sidStr}`;
+      }
+      const dateFromPost = extractDateFromDate(post.date);
+      if (dateFromPost) {
+        return `${dateFromPost}-${sidStr}`;
+      }
+    }
+    
+    // If it has partial format (e.g., "2026-02-15-0400"), ensure it's complete
+    if (/^\d{4}-\d{2}-\d{2}$/.test(sidStr)) {
+      const timeFromPath = extractTimeFromPath(post.path);
+      if (timeFromPath) {
+        return `${sidStr}-${timeFromPath}`;
+      }
+    }
+    
+    return sidStr;
+  }
+  
+  function extractDateFromPath(path) {
+    if (!path) return null;
+    const match = path.match(/(\d{4}-\d{2}-\d{2})/);
+    return match ? match[1] : null;
+  }
+  
+  function extractTimeFromPath(path) {
+    if (!path) return null;
+    const match = path.match(/-(\d{4})-/);
+    return match ? match[1] : null;
+  }
+  
+  function extractDateFromDate(dateStr) {
+    if (!dateStr) return null;
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return null;
+    const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+    const yy = kst.getUTCFullYear();
+    const mm = String(kst.getUTCMonth() + 1).padStart(2, '0');
+    const dd = String(kst.getUTCDate()).padStart(2, '0');
+    return `${yy}-${mm}-${dd}`;
+  }
+  
+  function generateSessionIdFromDate(dateStr) {
+    const d = new Date(dateStr);
     const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
     const yy = kst.getUTCFullYear();
     const mm = String(kst.getUTCMonth() + 1).padStart(2, '0');
@@ -113,6 +171,10 @@ layout: null
     const hh = String(kst.getUTCHours()).padStart(2, '0');
     const mm2 = String(kst.getUTCMinutes()).padStart(2, '0');
     return `${yy}-${mm}-${dd}-${hh}${mm2}`;
+  }
+
+  function getSessionId(post) {
+    return normalizeSessionId(post.session_id, post);
   }
 
   function groupBySession(results) {
@@ -129,7 +191,23 @@ layout: null
       groups[sessionId].posts.push(post);
     });
 
-    return Object.values(groups).sort((a, b) => b.session_id.localeCompare(a.session_id));
+    // Sort sessions: newest first (descending)
+    const sortedGroups = Object.values(groups).sort((a, b) => {
+      const sidA = String(a.session_id).padStart(13, '0');
+      const sidB = String(b.session_id).padStart(13, '0');
+      return sidB.localeCompare(sidA);
+    });
+
+    // Sort posts within each session: by session_order ascending
+    sortedGroups.forEach(group => {
+      group.posts.sort((a, b) => {
+        const orderA = parseInt(a.session_order, 10) || 0;
+        const orderB = parseInt(b.session_order, 10) || 0;
+        return orderA - orderB;
+      });
+    });
+
+    return sortedGroups;
   }
 
   function renderResults(groups) {
