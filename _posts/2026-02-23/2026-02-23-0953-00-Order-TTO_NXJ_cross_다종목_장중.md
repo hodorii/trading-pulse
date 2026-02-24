@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2026-02-23 23::00 +0900
-session_id: "2026-02-23-23"
-session_order: "0953"
+date: 2026-02-23 09:53:00 +0900
+session_id: "2026-02-23-0953"
+session_order: "00"
 title: "Order-TTO_NXJ_cross_다종목_장중"
 ---
 # 🌐 TTO NXJ 교차 분석 장중 보고서 (한국어 우선) - 다종목

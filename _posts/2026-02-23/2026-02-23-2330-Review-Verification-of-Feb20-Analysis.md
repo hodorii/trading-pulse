@@ -1,9 +1,9 @@
 ---
 layout: post
-date: 2026-02-23 23::00 +0900
-session_id: "2026-02-23-23"
-session_order: "2330"
-title: "2026-02-23-2330-Review-Verification-of-Feb20-Analysis"
+date: 2026-02-23 23:30:00 +0900
+session_id: "2026-02-23-2330"
+session_order: "00"
+title: "Review-Verification-of-Feb20-Analysis"
 ---
 # [복기] 02/20 분석 결과 검증 및 02/23 시장 대응 전략 복기 보고서
 

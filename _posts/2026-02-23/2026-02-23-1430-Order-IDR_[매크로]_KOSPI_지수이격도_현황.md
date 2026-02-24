@@ -1,9 +1,9 @@
 ---
 layout: post
-date: 2026-02-23 23::00 +0900
-session_id: "2026-02-23-23"
-session_order: "1430"
-title: "2026-02-23-1430-Order-IDR_[매크로]_KOSPI_지수이격도_현황"
+date: 2026-02-23 14:30:00 +0900
+session_id: "2026-02-23-1430"
+session_order: "00"
+title: "Order-IDR_[매크로]_KOSPI_지수이격도_현황"
 ---
 # [매크로] KOSPI 지수 이격도 및 유동성 에너지 실측 (2026-02-23)
 

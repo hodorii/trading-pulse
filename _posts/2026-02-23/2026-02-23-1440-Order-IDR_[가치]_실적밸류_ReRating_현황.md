@@ -1,9 +1,9 @@
 ---
 layout: post
-date: 2026-02-23 23::00 +0900
-session_id: "2026-02-23-23"
-session_order: "1440"
-title: "2026-02-23-1440-Order-IDR_[가치]_실적밸류_ReRating_현황"
+date: 2026-02-23 14:40:00 +0900
+session_id: "2026-02-23-1440"
+session_order: "00"
+title: "Order-IDR_[가치]_실적밸류_ReRating_현황"
 ---
 # [가치] 실적 기반 밸류에이션 리레이팅 판별 (2026-02-23)
 

@@ -1,9 +1,9 @@
 ---
 layout: post
-date: 2026-02-23 23::00 +0900
-session_id: "2026-02-23-23"
-session_order: "2359"
-title: "2026-02-23-2359-Order-IDR_[ETF]_시장_에너지_및_유망_ETF_5선"
+date: 2026-02-23 23:59:00 +0900
+session_id: "2026-02-23-2359"
+session_order: "00"
+title: "Order-IDR_[ETF]_시장_에너지_및_유망_ETF_5선"
 ---
 # [ETF] 시장 에너지 진단 및 유망 ETF 5선 발굴 (2026-02-24 00:30)
 

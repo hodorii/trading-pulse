@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2026-02-23 23::00 +0900
-session_id: "2026-02-23-23"
-session_order: "0953"
+date: 2026-02-23 09:53:00 +0900
+session_id: "2026-02-23-0953"
+session_order: "02"
 title: "Order-TTO_IDR_cross_KOR"
 ---
 # 🌐 TTO IDR cross-analysis 보고서 - 장중

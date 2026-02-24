@@ -1,9 +1,9 @@
 ---
 layout: post
-date: 2026-02-23 23::00 +0900
-session_id: "2026-02-23-23"
-session_order: "1440"
-title: "2026-02-23-1440-Order-IDR_[요약]_세션종합_final"
+date: 2026-02-23 14:40:00 +0900
+session_id: "2026-02-23-1440"
+session_order: "00"
+title: "Order-IDR_[요약]_세션종합_final"
 ---
 # [요약] 세션 종합 및 최종 의사결정 결과 (2026-02-23 14:40)
 

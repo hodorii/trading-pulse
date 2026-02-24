@@ -1,9 +1,9 @@
 ---
 layout: post
-date: 2026-02-23 23::00 +0900
-session_id: "2026-02-23-23"
-session_order: "2345"
-title: "2026-02-23-2345-Final-Tactical-Review-and-API-Protocol"
+date: 2026-02-23 23:45:00 +0900
+session_id: "2026-02-23-2345"
+session_order: "00"
+title: "Final-Tactical-Review-and-API-Protocol"
 ---
 # [최종복기] 02/20 분석 검증 및 02/24 대응 전략 고도화 보고서
 
